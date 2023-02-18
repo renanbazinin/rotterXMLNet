@@ -87,7 +87,9 @@ router.route("/rotter").get( async (req,res) =>{
 }
 
 catch(err)
-{
+{console.log("Error: ");
+console.log(err);
+
   res.send(err)
 }
 

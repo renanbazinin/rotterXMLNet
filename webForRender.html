@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  body.dark-mode {
+    background-color: #333333;
+    color: #cccccc;
+  }
+
+  body.dark-mode a {
+    color: #90caf9;
+  }
+
+
+</style>
+
+<body dir="rtl"  class="dark-mode" onload="keepGet()">
+  <h5 id="counter">Counter : </h5>
+    <button onclick=callRotter()>beep</button>
+
+    <div id="shit">
+
+    </div><br/>
+    <ul id="items"></ul>
+
+</body >
+
+
+<script>
+    let count = 0;
+  const theFetch = ()=>{
+
+    const url = "https://rotterxmltodata.onrender.com/rotter";
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.responseType = 'document';
+    xhr.onload =  ()=> {
+
+
+
+    document.getElementById('items').innerHTML=""; 
+
+    count++; 
+    document.getElementById("counter").innerHTML="counter = "+count
+    const xml = xhr.responseXML;
+    const items = xml.getElementsByTagName('item');
+    for (let i = 0; i < items.length; i++) {
+       const item = items[i];
+
+      let dateString = item.getElementsByTagName('pubDate')[0].textContent;
+      let date = new Date(dateString);
+      const time = date.toLocaleTimeString([], { hour12: false });
+     
+      const title = item.getElementsByTagName('title')[0].textContent;
+      const description = item.getElementsByTagName('description')[0].textContent;
+      const link = item.getElementsByTagName('guid')[0].textContent;
+
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = link;
+      a.textContent = title;
+      a.addEventListener('click', (event)=> {
+      event.preventDefault();
+      window.open(link);
+
+    });
+    
+
+
+    li.appendChild(document.createTextNode("[" + time + "] - "));
+    li.appendChild(a);
+    li.appendChild(document.createTextNode(' ' + description))
+
+      document.getElementById('items').appendChild(li);
+    }
+
+
+ 
+    
+  };
+
+
+
+  xhr.send();
+  }
+  const keepGet = async()=>{
+
+    theFetch();
+    setInterval( async()=> {
+      theFetch();
+      let time = Math.floor(Math.random() * 55) + 25;
+
+  }, 30000);
+  }
+
+</script>
+<script>
+const callRotter = async () => {
+  const url = "http://localhost:8001/rotter";
+  try {
+    const response = await fetch(url);
+    const xmlData = await response.text();
+
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlData, "text/xml");
+
+    const title = xmlDoc.getElementsByTagName("title")[0].textContent;
+    console.log(xmlDoc);
+    document.getElementById("shit").innerHTML = "sasa\n";
+    document.getElementById("shit").innerHTML += xmlDoc;
+    
+  } catch (err) {
+    console.error(err);
+  }
+};
+</script>
+</html>
