@@ -22,7 +22,7 @@
 </style>
 
 <body dir="rtl"  class="dark-mode" onload="keepGet()">
-  <h5 id="counter">Counter : </h5>
+  <p id="counter">Counter : </p>
     <button onclick=callRotter()>beep</button>
 
     <div id="shit">
@@ -48,7 +48,7 @@
     document.getElementById('items').innerHTML=""; 
 
     count++; 
-    document.getElementById("counter").innerHTML="counter = "+count
+    document.getElementById("counter").innerHTML="counter = "+count +"\nlast connection : "+Date.now().toISOString();
     const xml = xhr.responseXML;
     const items = xml.getElementsByTagName('item');
     for (let i = 0; i < items.length; i++) {
