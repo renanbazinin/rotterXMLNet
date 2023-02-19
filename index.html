@@ -36,6 +36,8 @@
 <script>
     let count = 0;
   const theFetch = ()=>{
+    let D = new Date(Date.now());
+  let formattedDate = `${D.getDate().toString().padStart(2, '0')}/${(D.getMonth() + 1).toString().padStart(2, '0')}/${D.getFullYear().toString().substr(-2)} ${D.getHours().toString().padStart(2, '0')}:${D.getMinutes().toString().padStart(2, '0')}:${D.getSeconds().toString().padStart(2, '0')}`;
     try{
     const url = "https://rotterxmltodata.onrender.com/rotter";
     const xhr = new XMLHttpRequest();
@@ -48,7 +50,7 @@
     document.getElementById('items').innerHTML=""; 
 
     count++; 
-    document.getElementById("counter").innerHTML="counter = "+count +"\nlast connection : "+Date.now().toISOString();
+    document.getElementById("counter").innerHTML="counter = "+count +"\nlast connection : "+formattedDate;
     const xml = xhr.responseXML;
     const items = xml.getElementsByTagName('item');
     for (let i = 0; i < items.length; i++) {
@@ -87,11 +89,11 @@
   
 
 
-  console.log("last connection to server: \n" + Date.now().toISOString() );
+  console.log("last connection to server: \n" +formattedDate);
   xhr.send();
   }
   catch(error){
-    console.log("Error in :  \n" + Date.now().toISOString() );
+    console.log("Error in :  \n" +formattedDate);
     console.error("An error occurred: " + error);
 
   }

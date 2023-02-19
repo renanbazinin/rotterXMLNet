@@ -69,6 +69,9 @@ String.prototype.replaceArray = function(find, replace) {
 
 router.route("/rotter").get( async (req,res) =>{
 
+  let D = new Date(Date.now());
+  let formattedDate = `${D.getDate().toString().padStart(2, '0')}/${(D.getMonth() + 1).toString().padStart(2, '0')}/${D.getFullYear().toString().substr(-2)} ${D.getHours().toString().padStart(2, '0')}:${D.getMinutes().toString().padStart(2, '0')}:${D.getSeconds().toString().padStart(2, '0')}`;
+  
   try{
 
  
@@ -81,7 +84,7 @@ router.route("/rotter").get( async (req,res) =>{
     
     console.log("Before ");
     console.log(xmlString);
-    console.log("last connection to server: \n" + Date.now().toISOString() );
+    console.log("last connection to server: \n" + formattedDate );
     let finalXML = xmlString;
     
     return res.send(finalXML);
