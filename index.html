@@ -50,9 +50,14 @@
     document.getElementById('items').innerHTML=""; 
 
     count++; 
-    document.getElementById("counter").innerHTML="counter = "+count +"\nlast connection : "+formattedDate;
+    
     const xml = xhr.responseXML;
     const items = xml.getElementsByTagName('item');
+    document.getElementById("counter").innerHTML="counter = "+count +"\nlast connection : "+formattedDate;
+    if(items == null){
+      document.getElementById("counter").innerHTML="counter = "+count +"\lost connection in: "+formattedDate;
+      return;
+    }
     for (let i = 0; i < items.length; i++) {
        const item = items[i];
 
