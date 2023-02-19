@@ -9,6 +9,12 @@
     <title>Document</title>
 </head>
 <style>
+
+      #clock {
+
+      text-shadow: 0 0 10px #1a1a1a;
+    }
+
   body.dark-mode {
     background-color: #333333;
     color: #cccccc;
@@ -23,7 +29,9 @@
 
 <body dir="rtl"  class="dark-mode" onload="keepGet()">
   <p id="counter">Counter : </p>
-    <button onclick=callRotter()>beep</button>
+
+
+<div id="clock"></div>
 
     <div id="shit">
 
@@ -34,6 +42,17 @@
 
 
 <script>
+
+    function updateTime() {
+      let now = new Date();
+      let hours = now.getHours().toString().padStart(2, '0');
+      let minutes = now.getMinutes().toString().padStart(2, '0');
+      let seconds = now.getSeconds().toString().padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+
     let count = 0;
   const theFetch = ()=>{
     let D = new Date(Date.now());
@@ -98,6 +117,7 @@
   xhr.send();
   }
   catch(error){
+    document.getElementById("counter").innerHTML="counter = "+count +"\lost connection in: "+formattedDate;
     console.log("Error in :  \n" +formattedDate);
     console.error("An error occurred: " + error);
 
