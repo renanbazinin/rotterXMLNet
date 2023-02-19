@@ -81,7 +81,7 @@ router.route("/rotter").get( async (req,res) =>{
     
     console.log("Before ");
     console.log(xmlString);
-    console.log("last connection to server: \n" + Date.now() );
+    console.log("last connection to server: \n" + Date.now().toISOString() );
     let finalXML = xmlString;
     
     return res.send(finalXML);

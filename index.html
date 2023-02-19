@@ -87,10 +87,11 @@
   
 
 
-
+  console.log("last connection to server: \n" + Date.now().toISOString() );
   xhr.send();
   }
   catch(error){
+    console.log("Error in :  \n" + Date.now().toISOString() );
     console.error("An error occurred: " + error);
 
   }
