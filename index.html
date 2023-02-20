@@ -129,9 +129,9 @@
   let timeInterval=30000;
   const keepGet = async()=>{
 
-    theFetch();
+    await theFetch();
     setInterval( async()=> {
-      theFetch();
+      await theFetch();
       //timeInterval = (Math.floor(Math.random() * 34) + 25)*10000;
 
   }, timeInterval);
