@@ -161,7 +161,7 @@ button:active:after {
 
   }
   xhr.onerror = ()=>{
-    
+    console.log("falid at:"+formattedDate);
     document.getElementById('reload').innerText="Faild!"
   }
 
@@ -189,7 +189,7 @@ button:active:after {
 
     await theFetch();
     setInterval( async()=> {
-      document.getElementById("counter").innerHTML+=" Delayed !"
+      document.getElementById("counter").innerHTML+=" Delayed"
       await theFetch();
       //timeInterval = (Math.floor(Math.random() * 34) + 25)*10000;
 
