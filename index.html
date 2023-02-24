@@ -6,7 +6,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RotterFresh</title>
+    <link rel = "icon" href = 
+    "https://scontent.fhfa1-1.fna.fbcdn.net/v/t31.18172-8/893580_570187223030803_535136276_o.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=i874Ua0kN8gAX9Lg9Lr&_nc_ht=scontent.fhfa1-1.fna&oh=00_AfBa2Bii03stu9NoZTx_porA1yW6RcCXVPSo5AZt3ZJvCw&oe=64204826" 
+            type = "image/x-icon">
 </head>
 <style>
 
@@ -134,7 +137,7 @@ button:active:after {
      
       const title = item.getElementsByTagName('title')[0].textContent;
       const description = item.getElementsByTagName('description')[0].textContent;
-      const link = item.getElementsByTagName('guid')[0].textContent;
+      const link = item.getElementsByTagName('guid')[0].textContent+"#0";
 
       const li = document.createElement('li');
       const a = document.createElement('a');
@@ -183,8 +186,10 @@ button:active:after {
   let timeInterval=30000;
   const keepGet = async()=>{
 
+
     await theFetch();
     setInterval( async()=> {
+      document.getElementById("counter").innerHTML+=" Delayed !"
       await theFetch();
       //timeInterval = (Math.floor(Math.random() * 34) + 25)*10000;
 
