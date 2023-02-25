@@ -12,7 +12,9 @@
             type = "image/x-icon">
 </head>
 <style>
-
+img{
+  margin-right:50%;
+}
     #clock {
 
     text-shadow: 0 0 10px #1a1a1a;
@@ -189,7 +191,7 @@ button:active:after {
   let timeInterval=30000;
   const keepGet = async()=>{
 
-
+    document.getElementById("counter").innerHTML="<img src='https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif' width='20px'>";
     await theFetch();
     setInterval( async()=> {
       //document.getElementById("counter").innerHTML+=" Delayed"
