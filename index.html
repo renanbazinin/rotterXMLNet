@@ -78,8 +78,12 @@ button:active:after {
 <body dir="rtl"  class="dark-mode" onload="keepGet()">
   <p id="counter">Counter : </p>
 <div style="text-align: left;">
+  <button onclick="zoomIn()">Zoom In</button>
+	<button onclick="zoomOut()">Zoom Out</button>
+
   <button onclick="stopSound()">Stop Sound</button>
 	<button onclick="playSound()">Play Sound</button>
+
 	<audio id="myAudio" src="http://glzwizzlv.bynetcdn.com/glglz_mp3"></audio>
 
 </div>
@@ -94,8 +98,23 @@ button:active:after {
 
 
 <script>
+  var myDiv = document.getElementById("items");
+
+  const zoomIn=()=> {
+			var fontSize = window.getComputedStyle(myDiv, null).getPropertyValue('font-size');
+			fontSize = parseFloat(fontSize);
+			myDiv.style.fontSize = (fontSize + 2) + 'px';
+		}
+
+		const zoomOut = ()=> {
+			var fontSize = window.getComputedStyle(myDiv, null).getPropertyValue('font-size');
+			fontSize = parseFloat(fontSize);
+			myDiv.style.fontSize = (fontSize - 2) + 'px';
+		}
+
+
   var audio = document.getElementById("myAudio");
-stopSound = ()=> {
+  const stopSound = ()=> {
 			audio.pause();
 			audio.currentTime = 0;
 		}
