@@ -76,8 +76,12 @@ button:active:after {
 
 <body dir="rtl"  class="dark-mode" onload="keepGet()">
   <p id="counter">Counter : </p>
+<div style="text-align: left;">
+  <button onclick="stopSound()">Stop Sound</button>
+	<button onclick="playSound()">Play Sound</button>
+	<audio id="myAudio" src="http://glzwizzlv.bynetcdn.com/glglz_mp3"></audio>
 
-
+</div>
 <div id="clock"></div>
   <button onclick="theFetch()" id="reload">Reload Again</button>
     <div id="shit">
@@ -89,7 +93,15 @@ button:active:after {
 
 
 <script>
+  var audio = document.getElementById("myAudio");
+stopSound = ()=> {
+			audio.pause();
+			audio.currentTime = 0;
+		}
 
+     playSound= ()=> {
+			audio.play();
+		}
     function updateTime() {
       let now = new Date();
       let hours = now.getHours().toString().padStart(2, '0');
