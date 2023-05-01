@@ -154,8 +154,8 @@ button:active:after {
     let D = new Date(Date.now());
   let formattedDate = `${D.getDate().toString().padStart(2, '0')}/${(D.getMonth() + 1).toString().padStart(2, '0')}/${D.getFullYear().toString().substr(-2)} ${D.getHours().toString().padStart(2, '0')}:${D.getMinutes().toString().padStart(2, '0')}:${D.getSeconds().toString().padStart(2, '0')}`;
     try{
-    const url ="http://localhost:8001/rotter"
-    //const url = "https://rotterxmltodata.onrender.com/rotter";
+    //const url ="http://localhost:8001/rotter"
+    const url = "https://rotterxmltodata.onrender.com/rotter";
     const xhr = new XMLHttpRequest();
     await xhr.open('GET', url);
     xhr.responseType = 'document';
@@ -205,7 +205,10 @@ button:active:after {
       const time = date.toLocaleTimeString([], { hour12: false });
      console.log(item);
 
-      const title = item.getElementsByTagName('title')[0].textContent;
+      const titleRaw = item.getElementsByTagName('title')[0].textContent;
+      const regexTitle = /\[CDATA\[(.*?)\]\]/;
+      const matchregexTitle= regex.exec(titleRaw)[1];
+      const title = matchregexTitle;
       const description = item.getElementsByTagName('description')[0].textContent;
       const link = item.getElementsByTagName('guid')[0].textContent+"#0";
 
