@@ -206,14 +206,12 @@ button:active:after {
      console.log(item);
 
       const titleRaw = item.getElementsByTagName('title')[0].textContent;
-      const regexTitle = /\[CDATA\[(.*?)\]\]/;
       const matchregexTitle= regex.exec(titleRaw)[1];
       const title = matchregexTitle;
 
       const description = item.getElementsByTagName('description')[0].textContent;
       
-      const titleLink = item.getElementsByTagName('title')[0].textContent;
-      const regexLink = /\[CDATA\[(.*?)\]\]/;
+      const LinkRaw = item.getElementsByTagName('title')[0].textContent;
       const matchregexLink= regex.exec(LinkRaw)[1];
       const link = item.getElementsByTagName('guid')[0].textContent;
 
