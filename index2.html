@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rotter.net RSS Reader</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>Rotter.net RSS Reader</h1>
+  <button onclick="loadFeed()">Load Feed</button>
+  <ul id="feed-list"></ul>
+  <script src="https://unpkg.com/rss-parser/dist/rss-parser.min.js"></script>
+  <script>
+    const parser = new RSSParser();
+    const feedList = document.getElementById('feed-list');
+    const corsAnywhereUrl = 'https://thingproxy.freeboard.io/fetch/';
+
+    async function loadFeed() {
+  const corsAnywhereUrl = 'https://thingproxy.freeboard.io/fetch/';
+  const rssUrl = 'https://rotter.net/rss/rotternews.xml';
+
+  try {
+    const response = await fetch(`${corsAnywhereUrl}${rssUrl}`, { mode: 'no-cors' });
+    const text = await response.text();
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(text, 'application/xml');
+    const items = xml.querySelectorAll('item');
+    const feed = [];
+
+    items.forEach((item) => {
+      const title = item.querySelector('title').textContent;
+      const link = item.querySelector('link').textContent;
+      const description = item.querySelector('description').textContent;
+      const pubDate = item.querySelector('pubDate').textContent;
+
+      feed.push({
+        title: title,
+        link: link,
+        description: description,
+        pubDate: pubDate,
+      });
+    });
+
+    return feed;
+  } catch (error) {
+    console.error(error);
+  }
+}
+  </script>
+</body>
+</html>

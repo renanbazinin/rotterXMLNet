@@ -7,8 +7,8 @@ const commentController = require("./controllers/commentController")
 
 
 const app = express();
-//const port = 8001;
-const port = process.env.PORT;
+const port = 8001;
+//const port = process.env.PORT;
 app.use(cors());
 
 //They converted  what

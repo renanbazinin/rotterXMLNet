@@ -154,7 +154,8 @@ button:active:after {
     let D = new Date(Date.now());
   let formattedDate = `${D.getDate().toString().padStart(2, '0')}/${(D.getMonth() + 1).toString().padStart(2, '0')}/${D.getFullYear().toString().substr(-2)} ${D.getHours().toString().padStart(2, '0')}:${D.getMinutes().toString().padStart(2, '0')}:${D.getSeconds().toString().padStart(2, '0')}`;
     try{
-    const url = "https://rotterxmltodata.onrender.com/rotter";
+    const url ="http://localhost:8001/rotter"
+    //const url = "https://rotterxmltodata.onrender.com/rotter";
     const xhr = new XMLHttpRequest();
     await xhr.open('GET', url);
     xhr.responseType = 'document';
@@ -182,10 +183,28 @@ button:active:after {
     for (let i = 0; i < items.length; i++) {
        const item = items[i];
 
-      let dateString = item.getElementsByTagName('pubDate')[0].textContent;
-      let date = new Date(dateString);
-      const time = date.toLocaleTimeString([], { hour12: false });
+       const pubDateElement = item.getElementsByTagName('pubDate')[0];
+       const pubDateCData = pubDateElement.childNodes[0];
+      const dateString = pubDateCData.textContent;
      
+      
+      const regex = /\[CDATA\[(.*?)\]\]/;
+      const match = regex.exec(dateString);
+      let dateStr = "Mon, 01 May 2023 00:00:00 +0300";
+      console.log(dateString);
+      console.log("shit")
+        console.log(match)
+      if(match != null){
+
+        dateStr = match[1]; // "Mon, 01 May 2023 09:39:01 +0300"
+      }
+
+       
+
+      const date = new Date(dateStr);
+      const time = date.toLocaleTimeString([], { hour12: false });
+     console.log(item);
+
       const title = item.getElementsByTagName('title')[0].textContent;
       const description = item.getElementsByTagName('description')[0].textContent;
       const link = item.getElementsByTagName('guid')[0].textContent+"#0";
