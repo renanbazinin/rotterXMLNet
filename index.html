@@ -212,7 +212,7 @@ button:active:after {
 
       const description = item.getElementsByTagName('description')[0].textContent;
       
-      const LinkRaw = item.getElementsByTagName('title')[0].textContent;
+      const LinkRaw = item.getElementsByTagName('guid')[0].textContent;
       const matchregexLink= regex.exec(LinkRaw)[1];
       const link = matchregexLink;
 
