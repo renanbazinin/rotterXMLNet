@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RotterFresh</title>
+    <link rel = "icon" href = 
+    "https://scontent.fhfa1-1.fna.fbcdn.net/v/t31.18172-8/893580_570187223030803_535136276_o.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=i874Ua0kN8gAX9Lg9Lr&_nc_ht=scontent.fhfa1-1.fna&oh=00_AfBa2Bii03stu9NoZTx_porA1yW6RcCXVPSo5AZt3ZJvCw&oe=64204826" 
+            type = "image/x-icon">
+</head>
+<style>
+  
+
+footer{
+  font-size: large;
+
+  text-align: left;
+  margin-top: 4px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+}
+
+
+img{
+  margin-right:50%;
+}
+    #clock {
+
+    text-shadow: 0 0 10px #1a1a1a;
+  }
+  li{
+    margin: 10px;
+  }
+  body.dark-mode {
+    font-size: 28px;
+    background-color: #333333;
+    color: #cccccc;
+  }
+
+  body.dark-mode a {
+    color: #90caf9;
+  }
+
+button{
+  background-color: #555555;
+  font-size: 20px;
+  position: relative;
+
+  border: none;
+
+
+
+  width: 141px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #4c4d4c; 
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+button:after {
+  content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+</style>
+
+<body dir="rtl"  class="dark-mode" onload="keepGet()">
+  <p id="counter">Counter : </p>
+<div style="text-align: left;">
+  <button onclick="zoomIn()">Zoom In</button>
+	<button onclick="zoomOut()">Zoom Out</button>
+
+  <button onclick="stopSound()">Stop Sound</button>
+	<button onclick="playSound()">Play Sound</button>
+
+	<audio id="myAudio" src="https://glzwizzlv.bynetcdn.com/glz_mp3"></audio>
+
+</div>
+<div id="clock"></div>
+  <button onclick="theFetch()" id="reload">Reload Again</button>
+    <div id="shit">
+
+    </div><br/>
+    <ul id="items"></ul>
+    <footer> <a href='https://renanbazinin.github.io/RenanBazininSite/'>Created by renan, mysite</a></footer>
+</body >
+
+
+<script>
+  var myDiv = document.getElementById("items");
+
+  const zoomIn=()=> {
+			var fontSize = window.getComputedStyle(myDiv, null).getPropertyValue('font-size');
+			fontSize = parseFloat(fontSize);
+			myDiv.style.fontSize = (fontSize + 2) + 'px';
+		}
+
+		const zoomOut = ()=> {
+			var fontSize = window.getComputedStyle(myDiv, null).getPropertyValue('font-size');
+			fontSize = parseFloat(fontSize);
+			myDiv.style.fontSize = (fontSize - 2) + 'px';
+		}
+
+
+  var audio = document.getElementById("myAudio");
+  const stopSound = ()=> {
+			audio.pause();
+			audio.currentTime = 0;
+		}
+
+     playSound= ()=> {
+			audio.play();
+		}
+    function updateTime() {
+      let now = new Date();
+      let hours = now.getHours().toString().padStart(2, '0');
+      let minutes = now.getMinutes().toString().padStart(2, '0');
+      let seconds = now.getSeconds().toString().padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    let count = 0;
+  const theFetch = async()=>{
+
+    document.getElementById('reload').innerText="WAIT!"
+
+    let D = new Date(Date.now());
+  let formattedDate = `${D.getDate().toString().padStart(2, '0')}/${(D.getMonth() + 1).toString().padStart(2, '0')}/${D.getFullYear().toString().substr(-2)} ${D.getHours().toString().padStart(2, '0')}:${D.getMinutes().toString().padStart(2, '0')}:${D.getSeconds().toString().padStart(2, '0')}`;
+    try{
+    const url = "https://rotterxmltodata.onrender.com/rotter";
+    const xhr = new XMLHttpRequest();
+    await xhr.open('GET', url);
+    xhr.responseType = 'document';
+    xhr.onload =  ()=> {
+
+
+
+    
+
+    count++; 
+    
+    const xml = xhr.responseXML;
+
+    console.table(xml);
+    const items = xml.getElementsByTagName('item');
+
+    document.getElementById("counter").innerHTML="counter = "+count +"\nlast connection : "+formattedDate;
+    if(items == null){
+      document.getElementById("counter").innerHTML="counter = "+count +"\lost connection in: "+formattedDate;
+      return;
+    }
+    else{
+      document.getElementById('items').innerHTML=""; 
+    }
+    for (let i = 0; i < items.length; i++) {
+       const item = items[i];
+
+      let dateString = item.getElementsByTagName('pubDate')[0].textContent;
+      let date = new Date(dateString);
+      const time = date.toLocaleTimeString([], { hour12: false });
+     
+      const title = item.getElementsByTagName('title')[0].textContent;
+      const description = item.getElementsByTagName('description')[0].textContent;
+      const link = item.getElementsByTagName('guid')[0].textContent+"#0";
+
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = link;
+      a.textContent = title;
+      a.addEventListener('click', (event)=> {
+      event.preventDefault();
+      window.open(link);
+
+    });
+    
+
+
+    li.appendChild(document.createTextNode("[" + time + "] - "));
+    li.appendChild(a);
+    li.appendChild(document.createTextNode(' ' + description))
+
+      document.getElementById('items').appendChild(li);
+    }
+
+
+  }
+  xhr.onerror = ()=>{
+    console.log("falid at:"+formattedDate);
+    document.getElementById('reload').innerText="Faild!"
+  }
+
+  
+
+  
+
+  xhr.send();
+  console.log("last connection to server: \n" +formattedDate);
+  document.getElementById('reload').innerText="Reload Again"
+  }
+  catch(error){
+
+    document.getElementById('reload').innerText="Failed, Try Again!"
+    document.getElementById("counter").innerHTML="counter = "+count +" lost connection in: "+formattedDate;
+    console.log("Error in :  \n" +formattedDate);
+    console.error("An error occurred: " + error);
+
+  }
+    
+  }
+  let timeInterval=30000;
+  const keepGet = async()=>{
+
+    document.getElementById("counter").innerHTML="<img src='https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif' width='20px'>";
+    await theFetch();
+    setInterval( async()=> {
+      //document.getElementById("counter").innerHTML+=" Delayed"
+      await theFetch();
+      //timeInterval = (Math.floor(Math.random() * 34) + 25)*10000;
+
+  }, timeInterval);
+  }
+
+</script>
+<script>
+const callRotter = async () => {
+  const url = "http://localhost:8001/rotter";
+  try {
+    const response = await fetch(url);
+    const xmlData = await response.text();
+
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlData, "text/xml");
+
+    const title = xmlDoc.getElementsByTagName("title")[0].textContent;
+    console.log(xmlDoc);
+    document.getElementById("shit").innerHTML = "sasa\n";
+    document.getElementById("shit").innerHTML += xmlDoc;
+    
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+</script>
+</html>
