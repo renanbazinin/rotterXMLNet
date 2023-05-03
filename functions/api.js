@@ -26,3 +26,4 @@ app.listen(port,()=>{
 
 )
 
+module.exports.handller =Serverless(app);
