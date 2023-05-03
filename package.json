@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/netlify-lambda serve src",
-    "build": "./node_modules/.bin/netlify-lambda build src"
-
+    "build": ".\\node_modules\\.bin\\netlify-lambda build src"
   },
   "author": "renan",
   "license": "ISC",
@@ -17,7 +16,7 @@
     "iconv": "^3.0.1",
     "iconv-lite": "^0.6.3",
     "netlify-cli": "14.4.0",
-    "netlify-lambda": "^2.0.15",
+    "netlify-lambda": "^2.0.16",
     "node-fetch": "^3.2.10",
     "serverless-http": "^3.2.0",
     "utf8": "^3.0.0",
