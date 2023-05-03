@@ -3,7 +3,8 @@ const cors = require("cors");
 const router = express.Router();
 
 
-const commentController = require("./controllers/commentController")
+const commentController = require("./controllers/commentController");
+const Serverless = require("serverless");
 
 
 const app = express();
@@ -15,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
-app.use("/",commentController)
+app.use("/.netlify/functions/api",commentController)
 
 
 app.listen(port,()=>{
@@ -24,3 +25,5 @@ app.listen(port,()=>{
 }
 
 )
+
+module.exports.handller =Serverless(app);

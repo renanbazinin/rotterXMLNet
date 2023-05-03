@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "./node_modules/.bin/netlify-lambda server arc",
+    "build": "./node_modules/.bin/netlify-lambda server arc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "renan",
@@ -18,6 +20,13 @@
     "utf8": "^3.0.0",
     "windows-1255": "^3.0.4",
     "xml-js": "^1.6.11",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.4.23",
+    "netlify-cli": "14.4.0",
+    "netlify-lambda":"2.0.16",
+    "server-http": "2.7.0",
+    "serverless": "^3.30.1"
+
   }
 }
+
+
