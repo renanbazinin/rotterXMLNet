@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hanger Buying Page</title>
+  <style>
+    /* Fake Navigation Bar Styles */
+    .fakeNavBar {
+      background-color: #333;
+      padding: 10px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .fakeNavBar h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .fakeNavBar p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    /* Buying Page Styles */
+    .product-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+
+    .product-images {
+      flex: 1;
+      margin-right: 20px;
+    }
+
+    .product-main-image {
+      width: 400px;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .product-preview-images {
+      display: flex;
+      margin-top: 10px;
+    }
+
+    .product-preview-images img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .product-options {
+      flex: 1;
+    }
+
+    .option {
+      margin-bottom: 20px;
+    }
+
+    .option label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .custom-select {
+      position: relative;
+      display: inline-block;
+    }
+
+    .custom-select select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 100%;
+      padding: 8px 30px 8px 10px;
+      border: none;
+      background-color: #f5f5f5;
+      color: #333;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .custom-select::after {
+      content: '\25BC';
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .buy-button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .buy-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+    <div class="fakeNavBar">
+      <h1>YotamZone</h1>
+      <p>Welcome to the YotamZone - Where cool things happen!</p>
+    </div>
+  
+    <div class="product-container">
+        <div class="product-images">
+            <img class="product-main-image" id="mainImage" src="https://images-na.ssl-images-amazon.com/images/I/51hlZZOBpdL._AC_UL232_SR232,232_.jpg" alt="Hanger">
+      
+            <div class="product-preview-images">
+                <img src="https://m.media-amazon.com/images/I/61rPVEqDQKL.jpg" alt="Preview 1" onclick="changeImage('https://m.media-amazon.com/images/I/61rPVEqDQKL.jpg')">
+                <img src="https://m.media-amazon.com/images/I/31m32W16k0L.jpg" alt="Preview 2" onclick="changeImage('https://m.media-amazon.com/images/I/31m32W16k0L.jpg')">
+                <img src="https://m.media-amazon.com/images/I/21XMJ7gC7fL._AC_.jpg" alt="Preview 3" onclick="changeImage('https://m.media-amazon.com/images/I/21XMJ7gC7fL._AC_.jpg')">
+                <img src="https://m.media-amazon.com/images/I/31m32W16k0L.jpg" alt="Preview 4" onclick="changeImage('https://m.media-amazon.com/images/I/31m32W16k0L.jpg')">
+              </div>
+          </div>
+      <div class="product-options">
+        <div class="option">
+          <label for="colorSelect">Color:</label>
+          <div class="custom-select">
+            <select id="colorSelect">
+              <option value="black">Black</option>
+              <option value="silver">Silver</option>
+              <option value="gold">Gold</option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="option">
+          <label for="lengthSelect">Length of Hands:</label>
+          <div class="custom-select">
+            <select id="lengthSelect">
+              <option value="short">Short</option>
+              <option value="medium">Medium</option>
+              <option value="long">Long</option>
+            </select>
+          </div>
+        </div>
+  
+        <button class="buy-button">Buy Now</button>
+      </div>
+    </div>
+  
+    <!-- Body Content -->
+    <br/><br/><br/><br/>    <br/><br/><br/><br/>
+    <br/><br/><br/><br/>
+    <br/><br/><br/><br/>
+    <br/><br/><br/><br/>
+    <br/><br/><br/><br/>
+
+    <footer style="background-color: #f2f2f2; padding: 20px; color: #333; text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto;">
+          <h2 style="font-size: 20px; margin-bottom: 10px;">About YotamZone</h2>
+          <p>Welcome to YotamZone, your go-to destination for high-quality hangers. Designed to provide optimal support and organization for your wardrobe.</p>
+          
+          <h2 style="font-size: 20px; margin-bottom: 10px;">Customize Your Hanger</h2>
+          <p>Choose your preferred color and hanger arm length:</p>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
+            <li><strong>Color:</strong> Black</li>
+            <li><strong>Hanger Arm Length:</strong> Short</li>
+          </ul>
+          
+          <h2 style="font-size: 20px; margin-bottom: 10px;">Why Choose YotamZone Hangers?</h2>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
+            <li>Durable construction</li>
+            <li>Smooth finish to prevent snagging</li>
+            <li>Space-saving design</li>
+            <li>Available in various colors and sizes</li>
+          </ul>
+          
+          <h2 style="font-size: 20px; margin-bottom: 10px;">Contact Us</h2>
+          <p>If you have any questions or need assistance, feel free to contact our friendly customer support team. We're here to help!</p>
+        </div>
+      </footer>
+  </body>
+  <script>
+    function changeImage(imageUrl) {
+      var mainImage = document.getElementById('mainImage');
+      mainImage.src = imageUrl;
+    }
+  </script>
+</html>
